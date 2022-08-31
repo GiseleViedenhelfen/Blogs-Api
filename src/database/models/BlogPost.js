@@ -15,7 +15,6 @@ const BlogPost = (sequelize, DataTypes) => {
       foreignKey: true,
     },
   }, {
-    createdAt: 'published',
     updatedAt: 'updated',
     tableName: 'BlogPosts',
   });
@@ -31,7 +30,7 @@ const BlogPost = (sequelize, DataTypes) => {
     });
   };
   
-  return PostCategory;
+  return BlogPost;
 };
 
-module.exports = PostCategory;
+module.exports = BlogPost;
