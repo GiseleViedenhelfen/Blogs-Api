@@ -1,16 +1,9 @@
 const jwt = require('jsonwebtoken');
 const { user } = require('../src/database/models');
+const userService = require('../services/user');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'seusecretdetoken';
+const { JWT_SECRET } = process.env;
 
-// const login = (req, res) => {
-//   const jwtConfig = {
-//     expiresIn: '7d',
-//     algorithm: 'HS256',
-//   };
-//   const token = jwt.sign({ data: user }, JWT_SECRET, jwtConfig);
-//   res.status(200).json({ token });
-// };
 const createUser = (req, res) => {
   const jwtConfig = {
     expiresIn: '7d',
@@ -19,4 +12,9 @@ const createUser = (req, res) => {
   const token = jwt.sign({ data: user }, JWT_SECRET, jwtConfig);
   res.status(201).json({ token });
 };
-module.exports = { createUser };
+const getAll = async (req, res) => {
+ const users = await userService.getAll();
+ console.log(users);
+ return res.status(200).json(users);
+};
+module.exports = { createUser, getAll };

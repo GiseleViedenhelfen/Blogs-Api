@@ -4,6 +4,7 @@ const controller = require('../controllers/userController');
 const middle = require('../middlewares/login');
 const middleUser = require('../middlewares/user');
 const token = require('../validators/createJWT');
+const validators = require('../validators/validateJWT');
 
 const app = express();
 
@@ -14,7 +15,9 @@ middle.emailCheck,
 middle.passwordCheck,
 middle.passwordAndEmailCheck,
 token);
-// controller.login
+app.get('/user',
+validators.validToken,
+controller.getAll);
 
 app.post('/user', 
 middleUser.name,
