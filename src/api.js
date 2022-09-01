@@ -3,6 +3,7 @@ const express = require('express');
 const controller = require('../controllers/userController');
 const middle = require('../middlewares/login');
 const middleUser = require('../middlewares/user');
+const middleCategory = require('../middlewares/categories');
 const token = require('../validators/createJWT');
 const validators = require('../validators/validateJWT');
 
@@ -25,6 +26,7 @@ middleUser.emailCheck,
 middleUser.passwordCheck,
 middleUser.existentUser,
 controller.createUser);
+app.get('/categories', middleCategory.categoryName);
 // ...
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../src/database/models');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'seusecretdetoken';
+const { JWT_SECRET } = process.env;
 
 const name = (req, res, next) => {
   const { displayName } = req.body;
