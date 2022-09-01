@@ -25,8 +25,10 @@ middleUser.name,
 middleUser.emailCheck,
 middleUser.passwordCheck,
 middleUser.existentUser,
+middleUser.error,
+// validators.validToken,
 controller.createUser);
-app.get('/categories', middleCategory.categoryName);
+app.post('/categories', middleCategory.categoryName);
 // ...
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`

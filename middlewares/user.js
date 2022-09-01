@@ -33,22 +33,27 @@ const passwordCheck = (req, res, next) => {
 const existentUser = async (req, res, next) => {
   const { displayName, email, password, image } = req.body;
   const user = await User.findOne({ where: { email } });
-  if (user) {
+    if (!user) {
+      const jwtConfig = {
+        expiresIn: '7d',
+        algorithm: 'HS256',
+      };
+      const token = jwt.sign({ data: user }, JWT_SECRET, jwtConfig);
+      await User.create({ displayName, email, password, image });
+      res.status(201).json({ token });
+    } else {
+      next(user);
+    }
+};
+const error = async (err, req, res, _next) => {
+  if (err) {
     res.status(409).json({ message: 'User already registered' });
-  } else {
-    await User.create({ displayName, email, password, image });
   }
-  const jwtConfig = {
-    expiresIn: '7d',
-    algorithm: 'HS256',
-  };
-  const token = jwt.sign({ data: user }, JWT_SECRET, jwtConfig);
-  res.status(201).json({ token });
-  next();
 };
 module.exports = {
   name,
   emailCheck,
   passwordCheck,
   existentUser,
+  error,
 };
