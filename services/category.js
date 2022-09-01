@@ -4,4 +4,11 @@ const categories = async (name) => {
   const result = await Category.create({ name });
   return result.dataValues;
 };
-module.exports = { categories };
+const getAll = async () => {
+  const result = await Category.findAll();
+  return result;
+};
+module.exports = {
+  categories,
+  getAll,
+};

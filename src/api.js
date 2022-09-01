@@ -33,6 +33,10 @@ app.post('/categories',
 validators.validToken,
 middleCategory.categoryName,
 categoryController.createCategory);
+
+app.get('/categories',
+validators.validToken,
+categoryController.getAll);
 // ...
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
