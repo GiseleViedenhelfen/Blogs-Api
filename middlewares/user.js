@@ -30,6 +30,7 @@ const passwordCheck = (req, res, next) => {
   }
   next();
 };
+
 const existentUser = async (req, res, next) => {
   const { displayName, email, password, image } = req.body;
   const user = await User.findOne({ where: { email } });
@@ -50,10 +51,22 @@ const error = async (err, req, res, _next) => {
     res.status(409).json({ message: 'User already registered' });
   }
 };
+const errorUser = async (req, res, next) => {
+  const { id } = req.params;
+  const result = await User.findByPk(id);
+
+  if (!result) {
+    return res.status(404).json({ message: 'User does not exist' });
+  }
+
+  next();
+};
+
 module.exports = {
   name,
   emailCheck,
   passwordCheck,
   existentUser,
   error,
+  errorUser,
 };

@@ -14,7 +14,11 @@ const createUser = (req, res) => {
 };
 const getAll = async (req, res) => {
  const users = await userService.getAll();
- console.log(users);
  return res.status(200).json(users);
 };
-module.exports = { createUser, getAll };
+const getById = async (req, res) => {
+  const { id } = req.params;
+  const User = await userService.findById(id);
+  return res.status(200).json(User);
+};
+module.exports = { createUser, getAll, getById };

@@ -15,6 +15,7 @@ const BlogPost = (sequelize, DataTypes) => {
       foreignKey: true,
     },
   }, {
+    timestamps: false,
     updatedAt: 'updated',
     tableName: 'BlogPosts',
   });

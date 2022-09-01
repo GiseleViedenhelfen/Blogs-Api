@@ -2,6 +2,7 @@ const express = require('express');
 // ...
 const controller = require('../controllers/userController');
 const categoryController = require('../controllers/categoriesController');
+// const postController = require('../controllers/blogPostController');
 const middle = require('../middlewares/login');
 const middleUser = require('../middlewares/user');
 const middleCategory = require('../middlewares/categories');
@@ -36,6 +37,11 @@ categoryController.createCategory);
 app.get('/categories',
 validators.validToken,
 categoryController.getAll);
+
+app.get('/user/:id',
+validators.validToken,
+middleUser.errorUser,
+controller.getById);
 
 app.use(middleUser.error);
 // ...
