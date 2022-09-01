@@ -2,7 +2,7 @@ const express = require('express');
 // ...
 const controller = require('../controllers/userController');
 const categoryController = require('../controllers/categoriesController');
-// const postController = require('../controllers/blogPostController');
+const postController = require('../controllers/blogPostController');
 const middle = require('../middlewares/login');
 const middleUser = require('../middlewares/user');
 const middleCategory = require('../middlewares/categories');
@@ -43,6 +43,9 @@ validators.validToken,
 middleUser.errorUser,
 controller.getById);
 
+app.get('/post',
+validators.validToken,
+postController.getAll);
 app.use(middleUser.error);
 // ...
 // É importante exportar a constante `app`,
